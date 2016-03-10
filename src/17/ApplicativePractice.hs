@@ -1,0 +1,3 @@
+module ApplicativePractice where
+
+

@@ -84,5 +84,21 @@ instance MonadTrans (StateT s) where
 
 newtype MaybeT m a = MaybeT { runMaybeT :: m (Maybe a) }
 
+instance (Functor f) => Functor (MaybeT f) where
+  fmap :: (a -> b) -> MaybeT f a -> MaybeT f b
+  fmap f (MaybeT fa) = MaybeT $ (fmap .fmap) f fa
+
+instance (Applicative m) => Applicative (MaybeT m) where
+  pure = MaybeT . pure . pure
+  MaybeT mf <*> MaybeT ma = MaybeT $ (<*>) <$> mf <*> ma
+
+instance (Monad m) => Monad (MaybeT m) where
+  return = pure
+  (MaybeT ma) >>= f = MaybeT $ do
+    v <- ma
+    case v of
+      Nothing -> return Nothing
+      Just a -> runMaybeT $ f a
+
 instance (MonadIO m) => MonadIO (MaybeT m) where
   liftIO = _

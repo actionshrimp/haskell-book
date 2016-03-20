@@ -17,17 +17,21 @@ executable haskell-book
   main-is:             Main.hs
   default-language:    Haskell2010
   build-depends:       base
+                     , text >= 1.2.2.0
 
 executable haskell-book-25
   hs-source-dirs:      src/25
   main-is:             ComposePractice.hs
   default-language:    Haskell2010
   build-depends:       base
+                     , text >= 1.2.2.0
 
 executable haskell-book-26
   hs-source-dirs:      src/26
   main-is:             MonadTransformersPractice.hs
   default-language:    Haskell2010
   build-depends:       base
+                     , containers
                      , scotty
+                     , text >= 1.2.2.0
                      , transformers

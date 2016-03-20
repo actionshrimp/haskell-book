@@ -100,5 +100,23 @@ instance (Monad m) => Monad (MaybeT m) where
       Nothing -> return Nothing
       Just a -> runMaybeT $ f a
 
+instance (MonadIO m) => MonadIO (EitherT e m) where
+  liftIO = lift . liftIO
+
+instance MonadTrans MaybeT where
+  lift :: (Monad m) => m a -> MaybeT m a
+  lift = MaybeT . liftM Just
+
 instance (MonadIO m) => MonadIO (MaybeT m) where
-  liftIO = _
+  liftIO = lift . liftIO
+
+instance MonadTrans (ReaderT r) where
+  lift :: (Monad m) => m a -> ReaderT r m a
+  lift = ReaderT . const
+
+instance (MonadIO m) => MonadIO (ReaderT r m) where
+  liftIO = lift . liftIO
+
+instance (MonadIO m) => MonadIO (StateT s m) where
+  liftIO = lift . liftIO
+

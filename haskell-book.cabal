@@ -41,7 +41,7 @@ executable haskell-book-26
 
 executable haskell-book-28
   hs-source-dirs:      src/28
-  main-is:             DifferenceList.hs
+  main-is:             Queue.hs
   default-language:    Haskell2010
   ghc-options:         -O2
   build-depends:       base

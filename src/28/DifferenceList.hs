@@ -1,4 +1,4 @@
-module Main where
+module DifferenceList where
 
 import Criterion.Main
 

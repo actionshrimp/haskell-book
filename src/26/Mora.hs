@@ -65,9 +65,9 @@ gameLoop = do
   p2Turn <- gameTurn Player2
   scores <- updateScores p1Turn p2Turn
   case scores of
-    (3, 3) -> liftIO (putStrLn "It's a tie!")
-    (3, _) -> liftIO (putStrLn "Player 1 wins!")
-    (_, 3) -> liftIO (putStrLn "Player 2 wins!")
+    (3, 3) -> liftIO . putStrLn $ "It's a tie! " ++ show scores
+    (3, _) -> liftIO . putStrLn $ "Player 1 wins! " ++ show scores
+    (_, 3) -> liftIO . putStrLn $ "Player 2 wins! " ++ show scores
     _ -> gameLoop
 
 main :: IO ()
